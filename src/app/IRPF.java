@@ -22,6 +22,8 @@ public class IRPF {
 	private String[] nomesDeducoes;
 	private float[] valoresDeducoes;
 
+	private float valorTotalImposto;
+
 	public IRPF() {
 		nomeRendimento = new String[0];
 		rendimentoTributavel = new boolean[0];
@@ -290,12 +292,28 @@ public class IRPF {
 		return soma;
 	}
 	
-  /**
+  	/**
 	 * Retorna o valor que será utilizado como base de cálculo para incidência do imposto
 	 * @return base de calculo para o imposto
 	 */
-  public float getBaseCalculo() {
-    return this.getTotalRendimentosTributaveis() - this.getDeducao();
-  }
+	public float getBaseCalculo() {
+		return this.getTotalRendimentosTributaveis() - this.getDeducao();
+	}
+
+	/**
+	 * Retorna o valor total de Impostos sobre a base de cálculo
+	 * @return total de imposto
+	 */
+	public float getTotalImposto() {
+		return valorTotalImposto;
+	}
+
+	/**
+	 * Retorna o valor da Alíquota Efetiva
+	 * @return aliquota efetiva
+	 */
+	public float getAliquotaEfetiva() {
+		return (this.getTotalImposto() / this.getTotalRendimentosTributaveis());
+	}
 	
 }
