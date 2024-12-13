@@ -297,7 +297,9 @@ public class IRPF {
 	 * @return base de calculo para o imposto
 	 */
 	public float getBaseCalculo() {
-		return this.getTotalRendimentosTributaveis() - this.getDeducao();
+    float totalDeducao = this.getDeducao() + this.getTotalOutrasDeducoes();
+    float totalRendimentos = this.getTotalRendimentosTributaveis();
+		return totalRendimentos - totalDeducao;
 	}
 
 	/**
