@@ -290,5 +290,12 @@ public class IRPF {
 		return soma;
 	}
 	
+  /**
+	 * Retorna o valor que será utilizado como base de cálculo para incidência do imposto
+	 * @return base de calculo para o imposto
+	 */
+  public float getBaseCalculo() {
+    return this.getTotalRendimentosTributaveis() - this.getDeducao();
+  }
 	
 }
