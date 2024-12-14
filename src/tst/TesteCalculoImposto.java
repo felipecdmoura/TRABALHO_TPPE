@@ -10,10 +10,6 @@ import org.junit.Test;
 
 import app.IRPF;
 
-/**
- *
- * @author moura
- */
 public class TesteCalculoImposto {
     IRPF irpf;
 
@@ -22,9 +18,8 @@ public class TesteCalculoImposto {
 		irpf= new IRPF();
 	}
     
-    @SuppressWarnings("deprecation")
     @Test
-    public void TesteCalculoImposto() {
+    public void TesteCalcularImposto() {
         irpf.criarRendimento("Salario", true, 8000);
         irpf.criarRendimento("Aluguel", true, 2000);
         irpf.criarRendimento("Bolsa", false, 1500);

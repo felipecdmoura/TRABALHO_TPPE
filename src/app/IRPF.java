@@ -347,7 +347,7 @@ public class IRPF {
 	 * @return aliquota efetiva
 	 */
 	public float getAliquotaEfetiva() {
-		return (this.getTotalImposto() / this.getTotalRendimentosTributaveis());
+		return (this.getTotalImposto() / this.getTotalRendimentosTributaveis())*100;
 	}
 	
 }
