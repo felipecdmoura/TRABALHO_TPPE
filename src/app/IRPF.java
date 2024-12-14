@@ -297,8 +297,8 @@ public class IRPF {
 	 * @return base de calculo para o imposto
 	 */
 	public float getBaseCalculo() {
-    float totalDeducao = this.getDeducao() + this.getTotalOutrasDeducoes();
-    float totalRendimentos = this.getTotalRendimentosTributaveis();
+		float totalDeducao = this.getDeducao() + this.getTotalPensaoAlimenticia();
+		float totalRendimentos = this.getTotalRendimentosTributaveis();
 		return totalRendimentos - totalDeducao;
 	}
 
@@ -307,6 +307,17 @@ public class IRPF {
 	 * @return total de imposto
 	 */
 	public float getTotalImposto() {
+		float base, imposto;
+		imposto = 0;
+		base = this.getBaseCalculo();
+		if (base > 2259.20 && base < 2826.65) {
+			if (base > 2826.65) {
+				imposto += 567.45;
+
+			}
+			
+		} 
+
 		return valorTotalImposto;
 	}
 
