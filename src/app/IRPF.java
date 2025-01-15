@@ -114,9 +114,8 @@ public class IRPF {
 	 * @param parentesco Grau de parentesco
 	 */
 	public void cadastrarDependente(String nome, String parentesco) {
-		nomesDependentes = adicionaDependente(nome);
-		
-		parentescosDependentes = adicionaParentesco(parentesco);
+		adicionaNomeDependente(nome);
+		adicionaParentescoDependente(parentesco);
 		
 		numDependentes++;
 	}
@@ -124,30 +123,28 @@ public class IRPF {
 	/**
 	 * Método para realizar a adição de um nome no registro de dependentes
 	 * @param nome
-	 * @return registro de dependentes com o novo nome
 	 */
-	public String[] adicionaDependente(String nome) {
+	public void adicionaNomeDependente(String nome) {
 		String[] temp = new String[nomesDependentes.length+1];
 		for (int i = 0; i < nomesDependentes.length; i++) {
 			temp[i] = nomesDependentes[i];
 		}
 		temp[nomesDependentes.length] = nome;
-		return temp;
+		nomesDependentes = temp;
 	}
 
 	/**
 	 * Método para realizar a adição do grau de parentesco no registro de parentescos de
 	 * dependentes
 	 * @param parentesco
-	 * @return registro de parentescos de dependentes com o grau de parentesco do novo nome
 	 */
-	public String[] adicionaParentesco(String parentesco) {
+	public void adicionaParentescoDependente(String parentesco) {
 		String[] temp = new String[parentescosDependentes.length + 1];
 		for(int i = 0; i < parentescosDependentes.length; i++) {
 			temp[i] = parentescosDependentes[i];
 		}
 		temp[parentescosDependentes.length] = parentesco;
-		return temp;
+		parentescosDependentes = temp;
 	}
 
 	/**
