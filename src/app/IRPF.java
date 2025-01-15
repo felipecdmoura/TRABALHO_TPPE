@@ -22,8 +22,6 @@ public class IRPF {
 	private String[] nomesDeducoes;
 	private float[] valoresDeducoes;
 
-	private float valorTotalImposto;
-
 	public IRPF() {
 		nomeRendimento = new String[0];
 		rendimentoTributavel = new boolean[0];
