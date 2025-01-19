@@ -22,8 +22,6 @@ public class IRPF {
 	private String[] nomesDeducoes;
 	private float[] valoresDeducoes;
 
-	private float valorTotalImposto;
-
 	public IRPF() {
 		nomeRendimento = new String[0];
 		rendimentoTributavel = new boolean[0];
@@ -114,22 +112,37 @@ public class IRPF {
 	 * @param parentesco Grau de parentesco
 	 */
 	public void cadastrarDependente(String nome, String parentesco) {
-		// adicionar dependente 
-		String[] temp = new String[nomesDependentes.length + 1];
-		for (int i=0; i<nomesDependentes.length; i++) {
+		adicionaNomeDependente(nome);
+		adicionaParentescoDependente(parentesco);
+		
+		numDependentes++;
+	}
+
+	/**
+	 * Método para realizar a adição de um nome no registro de dependentes
+	 * @param nome
+	 */
+	public void adicionaNomeDependente(String nome) {
+		String[] temp = new String[nomesDependentes.length+1];
+		for (int i = 0; i < nomesDependentes.length; i++) {
 			temp[i] = nomesDependentes[i];
 		}
 		temp[nomesDependentes.length] = nome;
 		nomesDependentes = temp;
-		
-		String[] temp2 = new String[parentescosDependentes.length + 1];
-		for (int i=0; i<parentescosDependentes.length; i++) {
-			temp2[i] = parentescosDependentes[i];
+	}
+
+	/**
+	 * Método para realizar a adição do grau de parentesco no registro de parentescos de
+	 * dependentes
+	 * @param parentesco
+	 */
+	public void adicionaParentescoDependente(String parentesco) {
+		String[] temp = new String[parentescosDependentes.length + 1];
+		for(int i = 0; i < parentescosDependentes.length; i++) {
+			temp[i] = parentescosDependentes[i];
 		}
-		temp2[parentescosDependentes.length] = parentesco;
-		parentescosDependentes = temp2;
-		
-		numDependentes++;
+		temp[parentescosDependentes.length] = parentesco;
+		parentescosDependentes = temp;
 	}
 
 	/**
@@ -307,39 +320,7 @@ public class IRPF {
 	 * @return total de imposto
 	 */
 	public float getTotalImposto() {
-		float base, imposto;
-		imposto = 0;
-		base = this.getBaseCalculo();
-		if (base > 2259.20) {
-			if (base > 2826.65) {
-				imposto += 42.56;
-
-			}else{
-				imposto += (base - 2259.20) * 0.075;
-			}
-		}
-		if (base > 2826.66) {
-			if (base > 3751.05) {
-				imposto += 138.66;
-
-			}else{
-				imposto += (base - 2826.66) * 0.15;
-			}
-		}
-		if (base > 3751.06) {
-			if (base > 4664.68) {
-				imposto += 205.57;
-			}else{
-				imposto += (base - 3751.06) * 0.225;
-			}
-		}
-		if (base > 4664.68) {
-			
-			imposto += (base - 4664.68) * 0.275;
-		}
-
-
-		return imposto;
+		return new CalculadoraImposto(this).calculaImposto();
 	}
 
 	/**
