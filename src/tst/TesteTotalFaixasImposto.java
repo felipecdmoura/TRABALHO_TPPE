@@ -15,14 +15,14 @@ import org.junit.runners.Parameterized.Parameters;
 import app.IRPF;
 
 @RunWith(Parameterized.class)
-public class TesteTotalImposto {
+public class TesteTotalFaixasImposto {
 
     private float sal, alu, bol, prev, pen;
     private double res;
 
     private IRPF irpf;
 
-    public TesteTotalImposto(float salario, float aluguel, float bolsa, float previdencia, float pensao, double result){
+    public TesteTotalFaixasImposto(float salario, float aluguel, float bolsa, float previdencia, float pensao, double result){
         this.sal = salario;
         this.alu = aluguel;
         this.bol = bolsa;
