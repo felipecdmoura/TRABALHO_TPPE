@@ -8,8 +8,8 @@ public class IRPF {
 	public static final boolean NAOTRIBUTAVEL = false;
 	
 	private List<Rendimento> rendimentos;
-    private int numRendimentos;
-    private float totalRendimentos;
+  private int numRendimentos;
+  private float totalRendimentos;
 	
 	private String[] nomesDependentes;
 	private String[] parentescosDependentes;
