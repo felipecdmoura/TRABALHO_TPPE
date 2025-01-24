@@ -17,42 +17,43 @@ import app.IRPF;
 @RunWith(Parameterized.class)
 public class TesteTotalFaixasImposto {
 
-    private float sal, alu, bol, prev, pen;
-    private double res;
+    private float baseCalculo, valorEsperado;
+
 
     private IRPF irpf;
 
-    public TesteTotalFaixasImposto(float salario, float aluguel, float bolsa, float previdencia, float pensao, double result){
-        this.sal = salario;
-        this.alu = aluguel;
-        this.bol = bolsa;
-        this.prev = previdencia;
-        this.pen = pensao;
-        this.res = result;
-
+    public TesteTotalFaixasImposto(float baseCalculo, float valorEsperado) {
+        this.baseCalculo = baseCalculo;
+        this.valorEsperado = valorEsperado;
     }
 
     @Parameters
     public static Collection<Object[]> getParameters() {
-        Object[][] parametros = new Object[][] {
-            {8000, 2000, 1500, 1500, 1500,  976.8},
-            {38000, 12000, 1500, 3000, 5000, 10601.8},
+        float[] basesCalculo = {
+            2259.20f, 2800.0f, 2826.66f, 5585.8f
         };
 
-        return Arrays.asList(parametros);
+        float[] valoresEsperados = {
+            0.0f, 40.56f, 42.56f, 640.09f
+        };
+
+        return Arrays.asList(new Object[][] {
+            {basesCalculo[0], valoresEsperados[0]},
+            {basesCalculo[1], valoresEsperados[1]},
+            {basesCalculo[2], valoresEsperados[2]},
+            {basesCalculo[3], valoresEsperados[3]}
+        });
+    }
+
+    @Before
+    public void setup() {
+        this.irpf = new IRPF();
+        this.irpf.criarRendimento("Salário", IRPF.TRIBUTAVEL, this.baseCalculo);
     }
 
     @Test
-    public void testImpostoTotal() {
-        irpf= new IRPF();
-        irpf.criarRendimento("Salario", true, sal);
-        irpf.criarRendimento("Aluguel", true,  alu);
-        irpf.criarRendimento("Bolsa", false,  bol);
-
-        irpf.cadastrarDependente("Pedro", "Filho");
-        irpf.cadastrarContribuicaoPrevidenciaria(prev);
-        irpf.cadastrarPensaoAlimenticia("Pedro",  pen);
-        assertEquals(res, irpf.getTotalImposto(), 0.1);
+    public void testImpostoFaixa() {
+        assertEquals(this.valorEsperado, this.irpf.getTotalImposto(), 0.01f);
     }
 
 }
