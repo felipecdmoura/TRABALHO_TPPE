@@ -1,14 +1,15 @@
 package app;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IRPF {
 
 	public static final boolean TRIBUTAVEL = true;
 	public static final boolean NAOTRIBUTAVEL = false;
-	private String[] nomeRendimento;
-	private boolean[] rendimentoTributavel;
-	private float[] valorRendimento;
-	private int numRendimentos;
-	private float totalRendimentos;
+	
+	private List<Rendimento> rendimentos;
+    private int numRendimentos;
+    private float totalRendimentos;
 	
 	private String[] nomesDependentes;
 	private String[] parentescosDependentes;
@@ -23,10 +24,11 @@ public class IRPF {
 	private float[] valoresDeducoes;
 
 	public IRPF() {
-		nomeRendimento = new String[0];
-		rendimentoTributavel = new boolean[0];
-		valorRendimento = new float[0];
 		
+		rendimentos = new ArrayList<>();
+        numRendimentos = 0;
+        totalRendimentos = 0f;
+
 		nomesDependentes = new String[0];
 		parentescosDependentes = new String[0];
 		numDependentes = 0;
@@ -49,32 +51,23 @@ public class IRPF {
 	 */
 	public void criarRendimento(String nome, boolean tributavel, float valor) {
 		//Adicionar o nome do novo rendimento
-		String[] temp = new String[nomeRendimento.length + 1];
-		for (int i=0; i<nomeRendimento.length; i++)
-			temp[i] = nomeRendimento[i];
-		temp[nomeRendimento.length] = nome;
-		nomeRendimento = temp;
 
-		//adicionar tributavel ou nao no vetor 
-		boolean[] temp2 = new boolean[rendimentoTributavel.length + 1];
-		for (int i=0; i<rendimentoTributavel.length; i++) 
-			temp2[i] = rendimentoTributavel[i];
-		temp2[rendimentoTributavel.length] = tributavel;
-		rendimentoTributavel = temp2;
-		
-		//adicionar valor rendimento ao vetor
-		float[] temp3 = new float[valorRendimento.length + 1];
-		for (int i=0; i<valorRendimento.length; i++) {
-			temp3[i] = valorRendimento[i];
-		}
-		temp3[valorRendimento.length] = valor; 
-		valorRendimento = temp3;
+		Rendimento novoRendimento = new Rendimento(nome, tributavel, valor);
+		rendimentos.add(novoRendimento);
 		
 		this.numRendimentos += 1;
 		this.totalRendimentos += valor;
 		
 	}
 
+	/**
+	 * Retorna a lista de rendimentos já cadastrados para o contribuinte
+	 * @return lista de rendimentos
+	 */
+	public List<Rendimento> getRendimentos() {
+        return rendimentos;
+    }
+	
 	/**
 	 * Retorna o número de rendimentos já cadastrados para o contribuinte
 	 * @return numero de rendimentos
@@ -96,14 +89,14 @@ public class IRPF {
 	 * @return valor total dos rendimentos tributáveis
 	 */
 	public float getTotalRendimentosTributaveis() {
-		float totalRendimentosTributaveis = 0;
-		for (int i=0; i<rendimentoTributavel.length; i++) {
-			if (rendimentoTributavel[i]) {
-				totalRendimentosTributaveis += valorRendimento[i];
-			}
-		}
-		return totalRendimentosTributaveis;
-	}
+        float totalRendimentosTributaveis = 0;
+        for (Rendimento rendimento : this.rendimentos) {
+            if (rendimento.getTributavel()) {
+                totalRendimentosTributaveis += rendimento.getValor();
+            }
+        }
+        return totalRendimentosTributaveis;
+    }
 
 	/**
 	 * Método para realizar o cadastro de um dependente, informando seu grau 

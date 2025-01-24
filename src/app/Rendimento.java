@@ -22,4 +22,17 @@ public class Rendimento {
     public float getValor(){
         return this.valor;
     }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTributavel(boolean tributavel) {
+        this.tributavel = tributavel;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
 }
