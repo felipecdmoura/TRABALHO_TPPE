@@ -1,38 +1,57 @@
 package app;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Rendimento {
-    private String nome;
-    private boolean tributavel;
-    private float valor;
+    private List<String> nome;
+    private List<Boolean> tributavel;
+    private List<Float> valor;
+    private int numRendimentos;
+    private float totalRendimentos;
 
-    public Rendimento(String nome, boolean tributavel, float valor){
-        this.nome = nome;
-        this.tributavel = tributavel;
-        this.valor = valor;
+    public Rendimento(){
+        this.nome = new ArrayList<String>();
+        this.tributavel = new ArrayList<Boolean>();
+        this.valor = new ArrayList<Float>();
+        numRendimentos = 0;
+        totalRendimentos = 0;
     }
 
-    public String getNome(){
-        return this.nome;
-    }
+    /**
+	 * Cadastra um rendimento na base do contribuinte, informando o nome do 
+	 * rendimento, seu valor e se ele é tributável ou não. 
+	 * @param nome nome do rendimento a ser cadastrado
+	 * @param tributavel true caso seja tributável, false caso contrário
+	 * @param valor valor do rendimento a ser cadastrado
+	 */
+	public void criarRendimento(String nome, boolean tributavel, float valor) {
 
-    public boolean getTributavel(){
-        return this.tributavel;
-    }
+		this.nome.add(nome);
+        this.tributavel.add(tributavel);
+        this.valor.add(valor);
+		
+		this.numRendimentos += 1;
+		this.totalRendimentos += valor;
+		
+	}
 
-    public float getValor(){
-        return this.valor;
-    }
-    
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public int getNumRendimentos() {
+		return this.numRendimentos;
+	}
 
-    public void setTributavel(boolean tributavel) {
-        this.tributavel = tributavel;
-    }
+    public float getTotalRendimentos() {
+		return this.totalRendimentos;
+	}
 
-    public void setValor(float valor) {
-        this.valor = valor;
+    public float getTotalRendimentosTributaveis() {
+        float totalRendimentosTributaveis = 0;
+        for (int i = 0; i < this.valor.size(); i++) {
+            if (this.tributavel.get(i)) {
+                totalRendimentosTributaveis += this.valor.get(i);
+            }
+        }
+        return totalRendimentosTributaveis;
     }
-
 }
+
+
