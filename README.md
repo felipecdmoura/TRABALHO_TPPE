@@ -24,18 +24,22 @@ Para o TP2, como pedido no enunciado, foi feito:
 
 
 ![Extrair Metodo](./assets/extrair_metodo.png)
+
 *Figura 1: Extrair Método*
 
 
 ### 2. Extração da classe IRPF, gerando a nova Classe Rendimento.java. Commit com a justificativa: https://github.com/felipecdmoura/TRABALHO_TPPE/commit/481d15a2f738912be842ac396a921313e7b6aa6f.
 
 ![Extrair Classe](./assets/extrair_classe.png)
+
 *Figura 2: Extrair Classe*
 
 ### 3. Substituição do método IRPF.getTotalImposto() por objeto método, no arquivo CalculadoraImposto.java.
 
 ![Novo getTotalImposto](./assets/novo_getTotalImposto.png) 
+
 *Figura 3: Novo getTotalImposto*
 
 ![Classe CalculadoraImposto](./assets/classe_CalculadoraImposto.png)
+
 *Figura 4: Classe CalculadoraImposto*
