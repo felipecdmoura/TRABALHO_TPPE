@@ -7,9 +7,7 @@ public class IRPF {
 	public static final boolean TRIBUTAVEL = true;
 	public static final boolean NAOTRIBUTAVEL = false;
 	
-	private List<Rendimento> rendimentos;
-    private int numRendimentos;
-    private float totalRendimentos;
+	private Rendimento rendimentos;
 	
 	private String[] nomesDependentes;
 	private String[] parentescosDependentes;
@@ -25,9 +23,7 @@ public class IRPF {
 
 	public IRPF() {
 		
-		rendimentos = new ArrayList<>();
-        numRendimentos = 0;
-        totalRendimentos = 0f;
+		rendimentos = new Rendimento();
 
 		nomesDependentes = new String[0];
 		parentescosDependentes = new String[0];
@@ -51,29 +47,16 @@ public class IRPF {
 	 */
 	public void criarRendimento(String nome, boolean tributavel, float valor) {
 		//Adicionar o nome do novo rendimento
-
-		Rendimento novoRendimento = new Rendimento(nome, tributavel, valor);
-		rendimentos.add(novoRendimento);
-		
-		this.numRendimentos += 1;
-		this.totalRendimentos += valor;
+		rendimentos.criarRendimento(nome, tributavel, valor);
 		
 	}
-
-	/**
-	 * Retorna a lista de rendimentos já cadastrados para o contribuinte
-	 * @return lista de rendimentos
-	 */
-	public List<Rendimento> getRendimentos() {
-        return rendimentos;
-    }
 	
 	/**
 	 * Retorna o número de rendimentos já cadastrados para o contribuinte
 	 * @return numero de rendimentos
 	 */
 	public int getNumRendimentos() {
-		return numRendimentos;
+		return rendimentos.getNumRendimentos();
 	}
 
 	/**
@@ -81,7 +64,7 @@ public class IRPF {
 	 * @return valor total dos rendimentos
 	 */
 	public float getTotalRendimentos() {
-		return totalRendimentos;
+		return rendimentos.getTotalRendimentos();
 	}
 
 	/**
@@ -89,13 +72,7 @@ public class IRPF {
 	 * @return valor total dos rendimentos tributáveis
 	 */
 	public float getTotalRendimentosTributaveis() {
-        float totalRendimentosTributaveis = 0;
-        for (Rendimento rendimento : this.rendimentos) {
-            if (rendimento.getTributavel()) {
-                totalRendimentosTributaveis += rendimento.getValor();
-            }
-        }
-        return totalRendimentosTributaveis;
+        return rendimentos.getTotalRendimentosTributaveis();
     }
 
 	/**
