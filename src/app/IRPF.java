@@ -7,6 +7,7 @@ public class IRPF {
 	public static final boolean TRIBUTAVEL = true;
 	public static final boolean NAOTRIBUTAVEL = false;
 	
+
 	private Rendimento rendimentos;
 	
 	private String[] nomesDependentes;
